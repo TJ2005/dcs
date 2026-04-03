@@ -16,8 +16,16 @@ Welcome to the SENTINEL documentation directory. This folder contains comprehens
   - Performance characteristics
   - API endpoint documentation
 
+### Implementation Phases
+
+- **[PHASE_0_VICTIM.md](./PHASE_0_VICTIM.md)** - Build vulnerable victim chatbot (baseline)
+
 ### Coming Soon
 
+- **PHASE_1_PROXY.md** - Add transparent SENTINEL proxy layer
+- **PHASE_2_DETECTION.md** - Implement detection pipeline
+- **PHASE_3_SCRUBBING.md** - Add output sanitization
+- **PHASE_4_DASHBOARD.md** - Build threat monitoring UI
 - **API.md** - Detailed API reference with request/response examples
 - **TESTING.md** - Testing strategy and test scenarios
 - **DEPLOYMENT.md** - Production deployment guide
