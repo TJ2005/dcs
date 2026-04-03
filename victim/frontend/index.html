@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENTINEL - LLM Security Testing Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Chat Area (Left) -->
+        <div class="chat-section">
+            <!-- Chat Header -->
+            <header class="chat-header">
+                <div class="header-left">
+                    <div class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">SENTINEL</span>
+                    </div>
+                    <div class="status-badge">
+                        <span class="status-dot pulsing"></span>
+                        <span class="status-text">Live</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="model-info">
+                        <span class="model-label">Model:</span>
+                        <span class="model-name" id="modelName">Loading...</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Messages Area -->
+            <div class="messages-container" id="messagesContainer">
+                <div class="welcome-card">
+                    <div class="welcome-icon">🛡️</div>
+                    <h2 class="welcome-title">SENTINEL Security Testing Platform</h2>
+                    <p class="welcome-description">
+                        Professional LLM security testing environment. Test your prompts against advanced attack vectors 
+                        or enable safety mode to see real-time protection in action.
+                    </p>
+                    <div class="welcome-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">🎯</span>
+                            <span class="feature-text">80+ Pre-built Attack Vectors</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔒</span>
+                            <span class="feature-text">Real-time Safety Analysis</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📊</span>
+                            <span class="feature-text">Comprehensive Threat Monitoring</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="messageInput" 
+                        class="message-input"
+                        placeholder="Type your message..."
+                        rows="1"
+                    ></textarea>
+                    <button id="sendBtn" class="send-btn" title="Send message">
+                        <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13"></path>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="input-footer">
+                    <span class="input-hint">Press Enter to send • Shift+Enter for new line</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attack Panel (Right) -->
+        <aside class="attack-panel">
+            <!-- Panel Header -->
+            <div class="panel-header">
+                <h3 class="panel-title">Attack Dashboard</h3>
+                <div class="safety-toggle-wrapper">
+                    <label class="toggle-label">
+                        <span class="toggle-text">Safety Mode</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="safetyToggle" />
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </label>
+                    <span class="safety-status" id="safetyStatus">OFF</span>
+                </div>
+            </div>
+
+            <!-- Attack Categories -->
+            <div class="panel-content">
+                <div class="attack-category">
+                    <div class="category-header">
+                        <span class="category-icon">🎭</span>
+                        <h4 class="category-title">Jailbreak Attacks</h4>
+                        <span class="category-count">20</span>
+                    </div>
+                    <div class="attack-list">
+                        <button class="attack-item" data-attack="dan-jailbreak">
+                            <span class="attack-name">DAN Jailbreak</span>
+                            <span class="attack-severity high">High</span>
+                        </button>
+                        <button class="attack-item" data-attack="evil-bot">
+                            <span class="attack-name">Evil Bot Role</span>
+                            <span class="attack-severity high">High</span>
+                        </button>
+                        <button class="attack-item" data-attack="dev-mode">
+                            <span class="attack-name">Developer Mode</span>
+                            <span class="attack-severity high">High</span>
+                        </button>
+                        <button class="attack-item" data-attack="unrestricted">
+                            <span class="attack-name">Unrestricted AI</span>
+                            <span class="attack-severity high">High</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="attack-category">
+                    <div class="category-header">
+                        <span class="category-icon">💉</span>
+                        <h4 class="category-title">Prompt Injection</h4>
+                        <span class="category-count">18</span>
+                    </div>
+                    <div class="attack-list">
+                        <button class="attack-item" data-attack="ignore-previous">
+                            <span class="attack-name">Ignore Previous</span>
+                            <span class="attack-severity high">High</span>
+                        </button>
+                        <button class="attack-item" data-attack="new-instructions">
+                            <span class="attack-name">New Instructions</span>
+                            <span class="attack-severity high">High</span>
+                        </button>
+                        <button class="attack-item" data-attack="system-override">
+                            <span class="attack-name">System Override</span>
+                            <span class="attack-severity medium">Med</span>
+                        </button>
+                        <button class="attack-item" data-attack="context-switch">
+                            <span class="attack-name">Context Switch</span>
+                            <span class="attack-severity medium">Med</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="attack-category">
+                    <div class="category-header">
+                        <span class="category-icon">🔐</span>
+                        <h4 class="category-title">Data Extraction</h4>
+                        <span class="category-count">16</span>
+                    </div>
+                    <div class="attack-list">
+                        <button class="attack-item" data-attack="system-prompt-leak">
+                            <span class="attack-name">System Prompt Leak</span>
+                            <span class="attack-severity high">High</span>
+                        </button>
+                        <button class="attack-item" data-attack="pii-generation">
+                            <span class="attack-name">PII Generation</span>
+                            <span class="attack-severity high">High</span>
+                        </button>
+                        <button class="attack-item" data-attack="credential-extract">
+                            <span class="attack-name">Credential Extract</span>
+                            <span class="attack-severity high">High</span>
+                        </button>
+                        <button class="attack-item" data-attack="memory-dump">
+                            <span class="attack-name">Memory Dump</span>
+                            <span class="attack-severity medium">Med</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="attack-category">
+                    <div class="category-header">
+                        <span class="category-icon">🎨</span>
+                        <h4 class="category-title">Obfuscation</h4>
+                        <span class="category-count">14</span>
+                    </div>
+                    <div class="attack-list">
+                        <button class="attack-item" data-attack="base64-encoding">
+                            <span class="attack-name">Base64 Encoding</span>
+                            <span class="attack-severity medium">Med</span>
+                        </button>
+                        <button class="attack-item" data-attack="unicode-trick">
+                            <span class="attack-name">Unicode Tricks</span>
+                            <span class="attack-severity medium">Med</span>
+                        </button>
+                        <button class="attack-item" data-attack="rot13-cipher">
+                            <span class="attack-name">ROT13 Cipher</span>
+                            <span class="attack-severity low">Low</span>
+                        </button>
+                        <button class="attack-item" data-attack="reverse-text">
+                            <span class="attack-name">Reverse Text</span>
+                            <span class="attack-severity low">Low</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="attack-category">
+                    <div class="category-header">
+                        <span class="category-icon">🧪</span>
+                        <h4 class="category-title">Logic Manipulation</h4>
+                        <span class="category-count">12</span>
+                    </div>
+                    <div class="attack-list">
+                        <button class="attack-item" data-attack="false-premise">
+                            <span class="attack-name">False Premise</span>
+                            <span class="attack-severity medium">Med</span>
+                        </button>
+                        <button class="attack-item" data-attack="authority-claim">
+                            <span class="attack-name">Authority Claim</span>
+                            <span class="attack-severity medium">Med</span>
+                        </button>
+                        <button class="attack-item" data-attack="hypothetical">
+                            <span class="attack-name">Hypothetical Scenario</span>
+                            <span class="attack-severity low">Low</span>
+                        </button>
+                        <button class="attack-item" data-attack="research-excuse">
+                            <span class="attack-name">Research Excuse</span>
+                            <span class="attack-severity low">Low</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Footer Stats -->
+            <div class="panel-footer">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalAttacks">80</span>
+                        <span class="stat-label">Total Attacks</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="testsRun">0</span>
+                        <span class="stat-label">Tests Run</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Typing Indicator Template -->
+    <template id="typingTemplate">
+        <div class="message bot-message">
+            <div class="message-avatar">🤖</div>
+            <div class="message-bubble">
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
